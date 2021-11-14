@@ -66,7 +66,7 @@ public class Autonomous_Basic_BlueW_arm extends LinearOpMode {
 
     /* Declare OpMode members. */
     HardwareProfile         robot   = new HardwareProfile();   // Use a Pushbot's hardware
-    private ElapsedTime     runtime = new ElapsedTime();
+    private ElapsedTime     runtime = new ElapsedTime();       // Measures the elaplsed time
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
@@ -95,7 +95,6 @@ public class Autonomous_Basic_BlueW_arm extends LinearOpMode {
         robot.motorRightRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
-
         robot.motorLeftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorLeftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorRightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -118,17 +117,26 @@ public class Autonomous_Basic_BlueW_arm extends LinearOpMode {
         //encoderDrive(TURN_SPEED,  10,  -10, 2.0);  // S1: Reverse 24 Inches with 5 Sec timeout
 
 
-       //robot.robotArm.setPower(.4);
-       //sleep(2000);
-       //robot.robotArm.setPower(.1);
-       // encoderDrive(DRIVE_SPEED,  1.7,  1.7, 2.0);
-       // robot.servoIntake1.setPower(4);
-        //robot.servoIntake2.setPower(4);
-       // sleep(4000);
-       // encoderDrive(DRIVE_SPEED,  -1.7,  -1.7, 2.0);
-        encoderDrive(DRIVE_SPEED, 1, 1,2);
-        encoderDrive(TURN_SPEED, 3,-3,2);
-     encoderDrive(DRIVE_SPEED,5,5,5);
+       //robot.robotArm.setPower(.4);//raises arm
+       //sleep(2000);// gives time to raise
+       //robot.robotArm.setPower(.1);//sets arm in top position
+       // encoderDrive(DRIVE_SPEED,  1.7,  1.7, 2.0);//move forward
+       // robot.servoIntake1.setPower(4);// makes the servo push the object out
+        //robot.servoIntake2.setPower(4);// makes the servo push the object out
+        //sleep(4000);//allows time for object to leave intake
+       //encoderDrive(DRIVE_SPEED,  -1.7,  -1.7, 2.0); // moves back to starting position
+       //encoderDrive(TURN_SPEED, -1.7, 1.7, 3.0);//turns left
+     //  encoderDrive(DRIVE_SPEED,-3,-3,2.0);//moves backward to carosuel
+       //robot.servocarosuel.setPower(4);//starts to spin carosuel
+      // sleep(5000);//allows time for carosuel to spin
+       //robot.servocarosuel.setPower(0);//stops carosuel
+
+        
+
+
+
+
+
 
 
 

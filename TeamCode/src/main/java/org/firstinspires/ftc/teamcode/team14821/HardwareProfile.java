@@ -61,7 +61,7 @@ public class HardwareProfile
     public DcMotor  motorRightRear  = null;
     public CRServo servoIntake1 = null;
     public CRServo servoIntake2 = null;
-    public CRServo servocarosuel = null;
+    public DcMotor servocarosuel = null;
     public DcMotor robotArm = null;
     //public DcMotor  leftArm     = null;
     //public Servo    leftClaw    = null;
@@ -93,7 +93,7 @@ public class HardwareProfile
         robotArm = hwMap.get(DcMotor.class, "robotArm");
         servoIntake1  = hwMap.get(CRServo.class, "servoIntake1");
         servoIntake2  = hwMap.get(CRServo.class, "servoIntake2");
-        servocarosuel  = hwMap.get(CRServo.class, "servocarosuel");
+        servocarosuel  = hwMap.get(DcMotor.class, "servocarosuel");
         motorLeftFront.setDirection(DcMotor.Direction.FORWARD);
         motorRightFront.setDirection(DcMotor.Direction.FORWARD);
         motorLeftRear.setDirection(DcMotor.Direction.FORWARD);

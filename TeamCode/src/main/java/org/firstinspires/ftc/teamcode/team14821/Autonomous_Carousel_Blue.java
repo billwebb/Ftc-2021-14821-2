@@ -30,9 +30,6 @@
 package org.firstinspires.ftc.teamcode.team14821;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -62,9 +59,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Auto: Basic Encoder_Arm", group="Pushbot")
-@Disabled
-public class Autonomous_Basic_BlueW_arm extends Autonomous_Base {
+@Autonomous(name="Auto: Carousel_Blue", group="Pushbot")
+public class Autonomous_Carousel_Blue extends Autonomous_Base {
 
     /* Declare OpMode members. */
     private ElapsedTime     runtime = new ElapsedTime();       // Measures the elaplsed time
@@ -75,86 +71,29 @@ public class Autonomous_Basic_BlueW_arm extends Autonomous_Base {
     @Override
     public void runOpMode() {
 
-        /*
-         * Initialize the drive system variables.
-         * The init() method of the hardware class does all the work here
-         */
-        robot.init(hardwareMap);
-
-        // Send telemetry message to signify robot waiting;
-        telemetry.addData("Status", "Resetting Encoders");    //
-        telemetry.update();
-
-        robot.motorLeftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorLeftRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorRightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorRightRear.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        robot.motorLeftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorLeftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorRightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorRightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d :%7d :%7d",
-                          robot.motorLeftFront.getCurrentPosition(),
-                          robot.motorLeftRear.getCurrentPosition(),
-                          robot.motorRightFront.getCurrentPosition(),
-                          robot.motorRightRear.getCurrentPosition());
-        telemetry.update();
-
-        // Wait for the game to start (driver presses PLAY)
-        waitForStart();
-
-        // Step through each leg of the path,
-        // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        //encoderDrive(TURN_SPEED,  10,  -10, 2.0);  // S1: Reverse 24 Inches with 5 Sec timeout
-
-
-       //robot.robotArm.setPower(.4);//raises arm
-       //sleep(2000);// gives time to raise
-       //robot.robotArm.setPower(.1);//sets arm in top position
-       // encoderDrive(DRIVE_SPEED,  1.7,  1.7, 2.0);//move forward
-       // robot.servoIntake1.setPower(4);// makes the servo push the object out
-        //robot.servoIntake2.setPower(4);// makes the servo push the object out
-        //sleep(4000);//allows time for object to leave intake
-       //encoderDrive(DRIVE_SPEED,  -1.7,  -1.7, 2.0); // moves back to starting position
-       //encoderDrive(TURN_SPEED, -1.7, 1.7, 3.0);//turns left
-     //  encoderDrive(DRIVE_SPEED,-3,-3,2.0);//moves backward to carosuel
-       //robot.servocarosuel.setPower(4);//starts to spin carosuel
-      // sleep(5000);//allows time for carosuel to spin
-       //robot.servocarosuel.setPower(0);//stops carosuel
-
-        
+        initAuto();
+        encoderDrive(DRIVE_SPEED,-20,-20,1);//moves to carousel
+        robot.servocarosuel.setPower(-1); //spins the carousel
+        sleep(5000);// gives time for spin
+        robot.servocarosuel.setPower(0); //stops carousel
+        encoderDrive(DRIVE_SPEED,5,5,1); //moves back
+        encoderDrive(TURN_SPEED,15,-15,1); //turns right
+        robot.robotArm.setPower(3);//raises arm
+        sleep(1000);// gives time for raise
+        robot.robotArm.setPower(0.1); //mantains arm position
+        encoderDrive(DRIVE_SPEED,43,43,3);//moves forward
+        encoderDrive(TURN_SPEED,-1,1,1);
+        robot.robotArm.setPower(-0.1);//lowers arm slightly
+        sleep(500);// gives time for spin
+        robot.robotArm.setPower(0.1);//raises arm
+        robot.servoIntake1.setPower(-4);//releases preloaded box
+        robot.servoIntake2.setPower(4);//releases preloaded box
+        sleep(3000);//gives time for release
+        encoderDrive(DRIVE_SPEED,-20,-20,2);//parks in warehouse
+        robot.robotArm.setPower(0);//lowers arm
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        robot.servocarosuel.setPower(1);
-        sleep(10000);     // pause for servos to move
-        robot.servocarosuel.setPower(0);
-
-        //never gonna give you up
-        //never gonna let you down
-        // never gonna run around and desert you
-        // never gonna make you cry
-        //never gonna say goodbye
-        //never gonna tell a lie just to hurt you
-
-        //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
-        //robot.rightClaw.setPosition(0.0);
-        //sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

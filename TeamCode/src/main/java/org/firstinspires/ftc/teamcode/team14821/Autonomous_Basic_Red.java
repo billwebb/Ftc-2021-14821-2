@@ -30,6 +30,7 @@
 package org.firstinspires.ftc.teamcode.team14821;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -62,7 +63,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="Auto: Basic Encoder_Red", group="Pushbot")
-public class Autonomous_Basic_Red extends LinearOpMode {
+@Disabled
+public class Autonomous_Basic_Red extends Autonomous_Base {
 
     /* Declare OpMode members. */
     HardwareProfile         robot   = new HardwareProfile();   // Use a Pushbot's hardware
@@ -137,83 +139,4 @@ public class Autonomous_Basic_Red extends LinearOpMode {
         telemetry.update();
     }
 
-    /*
-     *  Method to perform a relative move, based on encoder counts.
-     *  Encoders are not reset as the move is based on the current position.
-     *  Move will stop if any of three conditions occur:
-     *  1) Move gets to the desired position
-     *  2) Move runs out of time
-     *  3) Driver stops the opmode running.
-     */
-    public void encoderDrive(double speed,
-                             double leftInches, double rightInches,
-                             double timeoutS) {
-        int newLeftFrontTarget;
-        int newLeftRearTarget;
-        int newRightFrontTarget;
-        int newRightRearTarget;
-
-        // Ensure that the opmode is still active
-        if (opModeIsActive()) {
-
-            // Determine new target position, and pass to motor controller
-            newLeftFrontTarget = robot.motorLeftFront.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newLeftRearTarget = robot.motorLeftRear.getCurrentPosition() + (int)(leftInches * COUNTS_PER_INCH);
-            newRightFrontTarget = robot.motorRightFront.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
-            newRightRearTarget = robot.motorRightRear.getCurrentPosition() + (int)(rightInches * COUNTS_PER_INCH);
-            robot.motorLeftFront.setTargetPosition(newLeftFrontTarget);
-            robot.motorLeftRear.setTargetPosition(newLeftRearTarget);
-            robot.motorRightFront.setTargetPosition(newRightFrontTarget);
-            robot.motorRightRear.setTargetPosition(newRightRearTarget);
-
-            // Turn On RUN_TO_POSITION
-            robot.motorLeftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.motorLeftRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.motorRightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.motorRightRear.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            // reset the timeout time and start motion.
-            runtime.reset();
-            robot.motorLeftFront.setPower(Math.abs(speed));
-            robot.motorLeftRear.setPower(Math.abs(speed));
-            robot.motorRightFront.setPower(Math.abs(speed));
-            robot.motorRightRear.setPower(Math.abs(speed));
-
-            // keep looping while we are still active, and there is time left, and both motors are running.
-            // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
-            // its target position, the motion will stop.  This is "safer" in the event that the robot will
-            // always end the motion as soon as possible.
-            // However, if you require that BOTH motors have finished their moves before the robot continues
-            // onto the next step, use (isBusy() || isBusy()) in the loop test.
-            while (opModeIsActive() &&
-                   (runtime.seconds() < timeoutS) &&
-                   (robot.motorLeftFront.isBusy() && robot.motorLeftRear.isBusy() &&
-                           robot.motorRightFront.isBusy() && robot.motorRightRear.isBusy())) {
-
-                // Display it for the driver.
-                telemetry.addData("Path1",  "Running to %7d :%7d :%7d :%7d",
-                        newLeftFrontTarget, newLeftRearTarget, newRightFrontTarget, newRightRearTarget);
-                telemetry.addData("Path2",  "Running at %7d :%7d :%7d :%7d",
-                                            robot.motorLeftFront.getCurrentPosition(),
-                                            robot.motorLeftRear.getCurrentPosition(),
-                                            robot.motorRightFront.getCurrentPosition(),
-                                            robot.motorRightRear.getCurrentPosition());
-                telemetry.update();
-            }
-
-            // Stop all motion;
-            robot.motorLeftFront.setPower(0);
-            robot.motorLeftRear.setPower(0);
-            robot.motorRightFront.setPower(0);
-            robot.motorRightRear.setPower(0);
-
-            // Turn off RUN_TO_POSITION
-            robot.motorLeftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorLeftRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorRightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorRightRear.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-            //  sleep(250);   // optional pause after each move
-        }
-    }
 }

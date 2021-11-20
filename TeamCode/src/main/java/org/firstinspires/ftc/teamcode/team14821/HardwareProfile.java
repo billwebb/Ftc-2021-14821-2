@@ -94,7 +94,7 @@ public class HardwareProfile
         servoIntake1  = hwMap.get(CRServo.class, "servoIntake1");
         servoIntake2  = hwMap.get(CRServo.class, "servoIntake2");
         servocarosuel  = hwMap.get(DcMotor.class, "servocarosuel");
-        motorLeftFront.setDirection(DcMotor.Direction.FORWARD);
+        motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
         motorRightFront.setDirection(DcMotor.Direction.FORWARD);
         motorLeftRear.setDirection(DcMotor.Direction.FORWARD);
         motorRightRear.setDirection(DcMotor.Direction.REVERSE);

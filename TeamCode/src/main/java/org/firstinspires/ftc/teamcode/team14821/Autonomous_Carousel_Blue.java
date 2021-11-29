@@ -82,7 +82,7 @@ public class Autonomous_Carousel_Blue extends Autonomous_Base {
         sleep(1000);// gives time for raise
         robot.robotArm.setPower(0.1); //mantains arm position
         encoderDrive(DRIVE_SPEED,43,43,3);//moves forward
-        encoderDrive(TURN_SPEED,-1,1,1);
+        encoderDrive(TURN_SPEED,-2,2,1);//repostioms
         robot.robotArm.setPower(-0.1);//lowers arm slightly
         sleep(500);// gives time for spin
         robot.robotArm.setPower(0.1);//raises arm

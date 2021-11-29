@@ -59,8 +59,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Auto: Warehouse_Red", group="Pushbot")
-public class Autonomous_Warehouse_Red extends Autonomous_Base {
+@Autonomous(name="Auto: Carousel_Red2", group="Pushbot")
+public class Autonomous_Carousel_Red2 extends Autonomous_Base {
 
     /* Declare OpMode members. */
     private ElapsedTime     runtime = new ElapsedTime();       // Measures the elaplsed time
@@ -72,13 +72,23 @@ public class Autonomous_Warehouse_Red extends Autonomous_Base {
     public void runOpMode() {
 
         initAuto();
-
-
-        robot.robotArm.setPower(1);//raises arm
-        sleep(3000);
-        encoderDrive(DRIVE_SPEED,13,13,3);//moves to hub
-        encoderDrive(TURN_SPEED,-15,15,1);//turns left
-        encoderDrive(DRIVE_SPEED,20,20,2);//parks in warehouse
+        encoderDrive(DRIVE_SPEED,-20,-20,1);//moves to carousel
+        encoderDrive(TURN_SPEED,-20,20,3);
+        robot.servocarosuel.setPower(1); //spins the carousel
+        sleep(5000);// gives time for spin
+        robot.servocarosuel.setPower(0); //stops carousel
+        encoderDrive(DRIVE_SPEED,10,10,2); //moves forward
+        encoderDrive(TURN_SPEED,15,-15,1); //turns right
+        robot.robotArm.setPower(3);//raises arm
+        sleep(1000);// gives time for raise
+        robot.robotArm.setPower(0.1); //mantains arm position
+        encoderDrive(DRIVE_SPEED,15,15,3);//moves forward
+        robot.robotArm.setPower(-0.1);//lowers arm slightly
+        sleep(500);// gives time for lower
+        robot.robotArm.setPower(0.1);//maintains arm position
+        sleep(3000);//gives time for release
+        encoderDrive(DRIVE_SPEED,-20,-20,2);//parks in warehouse
+        robot.robotArm.setPower(0);//lowers arm
 
 
 

@@ -72,24 +72,25 @@ public class Autonomous_Carousel_Red extends Autonomous_Base {
     public void runOpMode() {
 
         initAuto();
-        encoderDrive(DRIVE_SPEED,-1,-1,2);//moves to carousel
+        encoderDrive(DRIVE_SPEED,-20,-20,1);//moves to carousel
         robot.servocarosuel.setPower(1); //spins the carousel
-        sleep(10000);// gives time for spin
+        sleep(5000);// gives time for spin
         robot.servocarosuel.setPower(0); //stops carousel
-        encoderDrive(DRIVE_SPEED,-1,-1,2); //moves back
-        encoderDrive(TURN_SPEED,-2,2,2); //turns right
-        encoderDrive(DRIVE_SPEED,22.5,22.5,3);//moves forward
-        encoderDrive(TURN_SPEED,1,-1,2); // turns left
+        encoderDrive(DRIVE_SPEED,5,5,1); //moves back
+        encoderDrive(TURN_SPEED,-15,15,1); //turns left
         robot.robotArm.setPower(3);//raises arm
         sleep(1000);// gives time for raise
         robot.robotArm.setPower(0.1); //mantains arm position
-        encoderDrive(DRIVE_SPEED,14,14,2); //moves to alliance specific shipping hub
-        robot.servoIntake1.setPower(4);//releases preloaded box
+        encoderDrive(DRIVE_SPEED,43,43,3);//moves forward
+        encoderDrive(TURN_SPEED,2,-2,1);//repositions
+        robot.robotArm.setPower(-0.1);//lowers arm slightly
+        sleep(500);// gives time for spin
+        robot.robotArm.setPower(0.1);//raises arm
+        robot.servoIntake1.setPower(-4);//releases preloaded box
         robot.servoIntake2.setPower(4);//releases preloaded box
         sleep(3000);//gives time for release
         encoderDrive(DRIVE_SPEED,-20,-20,2);//parks in warehouse
         robot.robotArm.setPower(0);//lowers arm
-
 
 
 

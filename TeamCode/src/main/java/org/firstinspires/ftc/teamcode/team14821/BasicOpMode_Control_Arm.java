@@ -78,29 +78,40 @@ public class BasicOpMode_Control_Arm extends LinearOpMode {
             double servocarosuelR;
             double robotArm;
 
+
             // Choose to drive using either Tank Mode, or POV Mode
             // Comment out the method that's not used.  The default below is POV.
 
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
+
+            double driveMinMax;
+            if (gamepad1.right_trigger > 0.5)
+            {
+                driveMinMax = 1.0;
+            }
+            else
+            {
+                driveMinMax = 0.8;
+            }
             double driveL = -gamepad1.left_stick_y;
             //double turn  =  gamepad1.right_stick_x;
-            drivePowerL    = Range.clip(driveL, -1.0, 1.0) ;
+            drivePowerL    = Range.clip(driveL, -driveMinMax,driveMinMax) ;
 
             double driveR = -gamepad1.right_stick_y;
             //double turn  =  gamepad1.right_stick_y;
-            drivePowerR    = Range.clip(driveR, -1.0, 1.0) ;
+            drivePowerR    = Range.clip(driveR, -driveMinMax, driveMinMax) ;
 
 
             double robotArmC = -gamepad2.left_stick_y;
             //double turn  =  gamepad1.right_stick_y;
             if (robotArmC > 0.5 )
             {
-                robotArm = 0.4;
+                robotArm = 0.6;
             }
             else if ( robotArmC < -0.5 )
             {
-                robotArm = 0;
+                robotArm = -0.2;
             }
             else
             {
@@ -108,10 +119,10 @@ public class BasicOpMode_Control_Arm extends LinearOpMode {
             }
             //robotArm    = Range.clip(robotArmC/2, -1.0, 1.0) ;
 
-            double servoIntake1 = -gamepad2.right_stick_y;
+            double servoIntake1 = gamepad2.right_stick_y;
             //double turn  =  gamepad2.right_stick_y;
             servoIntake1R    = Range.clip(servoIntake1, -1.0, 1.0) ;
-            double servoIntake2 = -gamepad2.right_stick_y;
+            double servoIntake2 = gamepad2.right_stick_y;
             //double turn  =  gamepad2.right_stick_y;
             servoIntake2R    = -Range.clip(servoIntake2, -1.0, 1.0) ;
             double servocarosuel= -gamepad2.right_trigger;

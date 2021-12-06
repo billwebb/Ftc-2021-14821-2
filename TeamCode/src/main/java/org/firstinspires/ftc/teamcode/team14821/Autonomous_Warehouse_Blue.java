@@ -76,14 +76,18 @@ public class Autonomous_Warehouse_Blue extends Autonomous_Base {
 
 
         robot.robotArm.setPower(1);//raises arm
-        sleep(3000);
-        encoderDrive(DRIVE_SPEED,15,15,3);//moves to hub
-        robot.servoIntake2.setPower(3);//places box
-        robot.servoIntake1.setPower(3);
-        sleep(3000);
-        encoderDrive(DRIVE_SPEED,-2,-2,2);//moves back
-        encoderDrive(TURN_SPEED,2,-2,2);//turns right
-        encoderDrive(DRIVE_SPEED,5,5,2);//parks in warehouse
+        sleep(2000);
+        encoderDrive(DRIVE_SPEED,22,22,3);//moves to hub
+        robot.robotArm.setPower(-0.1);//lowers arm slightly
+        sleep(500);// gives time for spin
+        robot.servoIntake2.setPower(1);//places box
+        robot.servoIntake1.setPower(-1);
+        sleep(1000);
+        robot.robotArm.setPower(1);//raises arm
+        sleep(500);
+        encoderDrive(DRIVE_SPEED,-7,-7,2);//moves back
+        encoderDrive(TURN_SPEED,-21,21,2);//turns right
+        encoderDrive(DRIVE_SPEED,40,40,4);//parks in warehouse
 
 
 

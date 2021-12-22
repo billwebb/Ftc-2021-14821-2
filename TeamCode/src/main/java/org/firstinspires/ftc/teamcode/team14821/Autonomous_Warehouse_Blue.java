@@ -92,7 +92,6 @@ public class Autonomous_Warehouse_Blue extends Autonomous_Base {
         encoderDrive(DRIVE_SPEED,-7.5,-7.5,2.5);//moves back
         encoderDrive(TURN_SPEED,-21,21,2);//turns right
         encoderDrive(DRIVE_SPEED,40,40,10);//parks in warehouse
-        encoderDrive(TURN_SPEED,10000000,-1000000000,1000);
 
 
 

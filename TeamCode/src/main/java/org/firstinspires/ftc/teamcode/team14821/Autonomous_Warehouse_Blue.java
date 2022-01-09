@@ -68,6 +68,7 @@ public class Autonomous_Warehouse_Blue extends Autonomous_Base {
 
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
+    static final double     DRIVE_SPEED_FAST        = 1.0;
 
     @Override
     public void runOpMode() {
@@ -89,9 +90,9 @@ public class Autonomous_Warehouse_Blue extends Autonomous_Base {
         robot.robotArm.setPower(0.1);//keep arm still
         robot.servoIntake1.setPower(0);
         robot.servoIntake2.setPower(0);
-        encoderDrive(DRIVE_SPEED,-7.5,-7.5,2.5);//moves back
-        encoderDrive(TURN_SPEED,-21,21,2);//turns right
-        encoderDrive(DRIVE_SPEED,40,40,10);//parks in warehouse
+        encoderDrive(DRIVE_SPEED,-7,-7,2.5);//moves back
+        encoderDrive(TURN_SPEED,-23,23,2.5);//turns right
+        encoderDrive(DRIVE_SPEED_FAST,70,70,10);//parks in warehouse
 
 
 

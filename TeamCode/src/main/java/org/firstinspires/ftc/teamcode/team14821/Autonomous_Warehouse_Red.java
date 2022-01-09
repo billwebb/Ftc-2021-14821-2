@@ -63,10 +63,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class Autonomous_Warehouse_Red extends Autonomous_Base {
 
     /* Declare OpMode members. */
-    private ElapsedTime     runtime = new ElapsedTime();       // Measures the elaplsed time
+    private ElapsedTime runtime = new ElapsedTime();       // Measures the elaplsed time
 
-    static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+    static final double DRIVE_SPEED = 0.6;
+    static final double TURN_SPEED = 0.5;
+    static final double DRIVE_SPEED_FAST = 1.0;
 
     @Override
     public void runOpMode() {
@@ -74,10 +75,9 @@ public class Autonomous_Warehouse_Red extends Autonomous_Base {
         initAuto();
 
 
-
         robot.robotArm.setPower(1);//raises arm
         sleep(2000);
-        encoderDrive(DRIVE_SPEED,22,22,3);//moves to hub
+        encoderDrive(DRIVE_SPEED, 22, 22, 3);//moves to hub
         robot.robotArm.setPower(-0.1);//lowers arm slightly
         sleep(500);// gives time for spin
         robot.robotArm.setPower(0.1);//keep arm still
@@ -89,10 +89,10 @@ public class Autonomous_Warehouse_Red extends Autonomous_Base {
         robot.robotArm.setPower(0.1);//keep arm still
         robot.servoIntake1.setPower(0);
         robot.servoIntake2.setPower(0);
-        encoderDrive(DRIVE_SPEED,-7.5,-7.5,2.5);//moves back
-        encoderDrive(TURN_SPEED,21,-21,2);//turns right
-        encoderDrive(DRIVE_SPEED,40,40,10);//parks in warehouse
 
+        encoderDrive(DRIVE_SPEED, -7, -7, 2.5);//moves back
+        encoderDrive(TURN_SPEED, 23, -23, 2.5);//turns right
+        encoderDrive(DRIVE_SPEED_FAST, 70, 70, 10);//parks in warehouse
 
 
         telemetry.addData("Path", "Complete");
